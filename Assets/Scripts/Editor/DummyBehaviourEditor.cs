@@ -6,11 +6,11 @@ public class DummyBehaviourEditor : Editor
 {
     public void OnEnable()
     {
-        TestOverlay.instance.displayed = true;
+        TestOverlay.DoWithInstances(instance => instance.displayed = true);
     }
 
     public void OnDisable()
     {
-        TestOverlay.instance.displayed = false;
+        TestOverlay.DoWithInstances(instance => instance.displayed = false);
     }
 }

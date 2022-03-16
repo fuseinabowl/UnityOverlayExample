@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Overlays;
@@ -5,18 +7,23 @@ using UnityEditor.Overlays;
 [Overlay(typeof(SceneView), "Test IMGUI Overlay")]
 public class TestImguiOverlay : IMGUIOverlay
 {
-    public static TestImguiOverlay instance = null;
+    private static List<TestImguiOverlay> instances = new List<TestImguiOverlay>();
 
     public override void OnCreated()
     {
-        instance = this;
+        instances.Add(this);
     }
 
     public override void OnWillBeDestroyed()
     {
-        if (instance == this)
+        instances.Remove(this);
+    }
+
+    public static void DoWithInstances(Action<TestImguiOverlay> doWithInstance)
+    {
+        foreach (var instance in instances)
         {
-            instance = null;
+            doWithInstance(instance);
         }
     }
 
