@@ -15,6 +15,13 @@ class TestButton : EditorToolbarButton
     {
         icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Scripts/Editor/puzzle.png");
         tooltip = "Puzzling!";
+
+        clicked += OnClicked;
+    }
+
+    private void OnClicked()
+    {
+        Debug.Log("Hello from Editor Toolbar Button");
     }
 }
 
